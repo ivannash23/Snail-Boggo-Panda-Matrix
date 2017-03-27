@@ -9,6 +9,9 @@ task git_repos: :environment do
 
   repos.each do |repo|
     readme = github.repos.contents.readme user, repo.name
+    # readme = readme.content.encode('utf-8', :invalid => :replace, :undef => :replace, :replace => '_') #, :invalid => :replace, :undef => :replace, :replace => '_')
+    p readme.content.encoding
+    # readme.content = readme.content.force_encoding("UTF-8")
     rendered_readme_md = Base64.decode64 readme.content
     rendered_readme_HTML = markdown.render rendered_readme_md
     rendered_readme_HTML = rendered_readme_HTML.force_encoding("UTF-8")
@@ -19,5 +22,5 @@ task git_repos: :environment do
                 content:rendered_readme_HTML
                 )
   end
-  Repo.reindex
+  # Repo.reindex
 end
