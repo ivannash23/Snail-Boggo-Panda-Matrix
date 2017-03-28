@@ -40,6 +40,8 @@ gem 'redcarpet'
 # elastic search +
 gem 'searchkick'
 
+gem 'acts_as_commentable_with_threading'
+
 
 
 # Use Capistrano for deployment

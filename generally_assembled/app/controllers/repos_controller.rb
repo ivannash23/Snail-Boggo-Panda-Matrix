@@ -5,6 +5,8 @@ class ReposController < ApplicationController
   end
 
   def show
-    @repos = Repo.find_by_id(params[:id])
+    @repo = Repo.find_by_id(params[:id])
+
   end
+
 end

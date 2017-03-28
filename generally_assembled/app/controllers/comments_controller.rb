@@ -1,74 +1,44 @@
 class CommentsController < ApplicationController
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  # layout 'admin'
 
-  # GET /comments
-  # GET /comments.json
-  def index
-    @comments = Comment.all
-  end
+  # Define your restrict methods and use them like this:
+  #
+  # before_action :user_required,  except: %w[index create]
+  # before_action :owner_required, except: %w[index create]
+  # before_action :admin_required, only:   %w[total_draft total_published total_deleted total_spam]
+  
+  include TheComments::Controller
 
-  # GET /comments/1
-  # GET /comments/1.json
-  def show
-  end
+  # >>> include TheComments::Controller <<<
+  # (!) Almost all methods based on *current_user* method
+  #
+  # 1. Controller's public methods list:
+  # You can redifine it for your purposes
+  # public
+  # %w[ manage index create edit update ]
+  # %w[ my_comments my_draft my_published ]
+  # %w[ draft published deleted spam ]
+  # %w[ to_draft to_published to_deleted to_spam ]
+  # %w[ total_draft total_published total_deleted total_spam ]
+  #
+  #
+  # 2. Controller's private methods list:
+  # You can redifine it for your purposes
+  #
+  # private
+  # %w[ comment_template comment_partial ]
+  # %w[ denormalized_fields request_data_for_comment define_commentable ]
+  # %w[ comment_params patch_comment_params ]
+  # %w[ ajax_requests_required cookies_required ]
+  # %w[ empty_trap_required tolerance_time_required ]
 
-  # GET /comments/new
-  def new
-    @comment = Comment.new
-  end
-
-  # GET /comments/1/edit
-  def edit
-  end
-
-  # POST /comments
-  # POST /comments.json
-  def create
-    @comment = Comment.new(comment_params)
-
-    respond_to do |format|
-      if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
-        format.json { render :show, status: :created, location: @comment }
-      else
-        format.html { render :new }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # PATCH/PUT /comments/1
-  # PATCH/PUT /comments/1.json
-  def update
-    respond_to do |format|
-      if @comment.update(comment_params)
-        format.html { redirect_to @comment, notice: 'Comment was successfully updated.' }
-        format.json { render :show, status: :ok, location: @comment }
-      else
-        format.html { render :edit }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
-      end
-    end
-  end
-
-  # DELETE /comments/1
-  # DELETE /comments/1.json
-  def destroy
-    @comment.destroy
-    respond_to do |format|
-      format.html { redirect_to comments_url, notice: 'Comment was successfully destroyed.' }
-      format.json { head :no_content }
-    end
-  end
-
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_comment
-      @comment = Comment.find(params[:id])
-    end
-
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def comment_params
-      params.fetch(:comment, {})
-    end
+  # KAMINARI pagination:
+  # following methods based on gem "kaminari"
+  # You should redefine them if you use something else
+  #
+  # public
+  # %w[ manage index edit ]
+  # %w[ draft published deleted spam ]
+  # %w[ my_comments my_draft my_published ]
+  # %w[ total_draft total_published total_deleted total_spam ]
 end

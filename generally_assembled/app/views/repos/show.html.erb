@@ -2,9 +2,9 @@
 <div class="container-fluid">
 	<div class="col-md-8">
 		<div class="thumbnail">
-			<h1 class="header-repos"><%= @repos.name %></h1>
+			<h1 class="header-repos"><%= @repo.name %></h1>
 			<hr>
-			<h4><%= raw @repos.content%></h4>
+			<h4><%= raw @repo.content%></h4>
 		</div>
 	</div>
 	<div class="col-md-4">
@@ -13,4 +13,6 @@
 			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
 		</div>
 	</div>
+	<%= 'the_comments/tree', locals: { commentable: @post, comments_tree: @comments }=>
+
 </div>

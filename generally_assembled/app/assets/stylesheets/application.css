@@ -28,3 +28,44 @@ body{
 .header-repos{
   text-transform: capitalize;
 }
+
+body * {
+  font-style: normal ;
+  color: black ;
+
+}
+
+body {
+  background-color: #dce6f2 !important;
+}
+
+.thumbnail {
+  padding: 30px !important;
+  background-color: #fcfcfc !important;
+  border-color:#31b0d5 !important;
+  
+}
+
+.title {
+  background-color: #f2f5f9 !important;
+  border-color:#31b0d5 !important;
+}
+
+.repo-button-well {
+  height: 75px;
+  border-color:#31b0d5 !important;
+}
+
+.btn {
+  margin-right: 10px;
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+.nav-bar {
+  
+}
+
+
+
+
