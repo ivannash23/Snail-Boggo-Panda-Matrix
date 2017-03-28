@@ -41,7 +41,7 @@ gem 'redcarpet'
 gem 'searchkick'
 
 gem 'acts_as_commentable_with_threading'
-gem "the_comments", "~> 2.2.1"
+
 
 
 # Use Capistrano for deployment
