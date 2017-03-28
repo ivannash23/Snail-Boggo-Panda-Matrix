@@ -19,4 +19,3 @@ $( document ).ready(function() {
     console.log( "ready!" );
 });
 
-//= require the_comments
