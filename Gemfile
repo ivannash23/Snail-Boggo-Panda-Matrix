@@ -64,7 +64,6 @@ group :development do
   gem 'pry-rails'
   # gem 'better_errors'
   gem 'seed_dump'
-  gem 'figaro'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
