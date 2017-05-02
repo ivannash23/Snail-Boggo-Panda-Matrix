@@ -1,3 +1,3 @@
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :github, Rails.application.secrets.github_client_id, Rails.application.secrets.github_client_secret, scope: "user:email, user:name"
+  provider :github, ENV["CLIENT_ID"], ENV["CLIENT_SECRET"], scope: "user:email, user:name"
 end

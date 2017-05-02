@@ -1,58 +1,68 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>GenerallyAssembled</title>
+    <title>GA-Hub</title>
     <%= csrf_meta_tags %>
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
   </head>
-
   <body>
-  <!-- change the navigation depending if the user is log in or not -->
-  <% if current_user %>
-  <div class="row container-fluid grey-background">
-    <div class="col-sm-1">
-    <a href="/"><img class="img-responsive image" src="https://i.imgur.com/9PfJxoO.png"></a>
-    </div>
-    <!-- begin hidden -->
-    <div class="col-sm-4 col-sm-offset-4 search-bar">
-      <div class="input-group">
-        <%= form_tag("/search", method: "get") do %>
-          <%= text_field_tag(:q) %>
-          <%= submit_tag("Search") %>
+    <div class="container-fluid">
+      <!-- nav bar -->
+      <div class="row black-background">
+        <!-- GA Logo -->
+        <div class="col-xs-1">
+          <%= link_to( image_tag("https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fculturelabx.com%2Fwp-content%2Fuploads%2F2014%2F10%2Fgeneral-assembly-logo.png&f=1",
+          :width=> "90px", :height=> "90px",
+          :class=> "img ga-logo",
+          :title=> "Home"),
+          "/") %>
+        </div>
+        <!-- Search Bar (begin hidden) -->
+        <div class="col-xs-10">
+          <% if !@homepage %>
+          <div class="search-bar">
+            <div class="input-group" >
+              <%= form_tag("/search", method: "get") do %>
+                <%= text_field_tag(:q) %>
+                <%= submit_tag("Search") %>
+              <% end %>
+            </div>
+          </div>
+          <% end %>
+        </div>
+        <!-- GitHub User Image or Logo -->
+        <% if current_user %>
+          <div class="col-xs-1">
+            <%= link_to( image_tag(current_user[:image_url],
+            :width=> "70px", :height=> "70px",
+            :class=> "img-responsive img-circle img",
+            :title=> "Logout"),
+            "/signout", :class=> "standard-text") %>
+          </div>
+        <% else %>
+          <div class="col-xs-1">
+            <%= link_to( image_tag("https://images.duckduckgo.com/iu/?u=http%3A%2F%2Fjdpirtle.com%2Fimages%2Fsocial_icons%2Fgithub_white.png&f=1",
+            :width=> "70px", :height=> "70px",
+            :class=> "img-responsive img",
+            :title=> "Login"),
+            "/auth/github", :class=> "standard-text") %>
+          </div>
         <% end %>
       </div>
-    </div>
-    <!-- end hidden -->
-    <div class="col-sm-1 col-sm-offset-2">
-      <h5><%= image_tag current_user[:image_url], :width=> "60px", :height=> "60px", :class=> "profile-pic" %>
-      <%= link_to "Sign Out", "/signout", :class=> "standard-text"%>
-      </h5>
-    </div>
-  </div>
+      <!-- end of navigation -->
 
-  <% else %>
-    <div class="container background">
-      <div class="row">
-        <div class="col-lg-8 col-lg-offset-2 landing">
-          <div class="col-sm-1 col-sm-offset-5">
-            <h4><%= link_to(image_tag("https://image.flaticon.com/icons/svg/25/25231.svg", :width => 170, :height => 170, :title => "Click here to return to Home"), "/auth/github", :class=> "github-logo")%></h4>
+      <% if current_user %>
+        <%= flash.notice %>
+      <% end %>
 
-          </div>
+      <%= yield %>
 
-        </div>
+      <div class="navbar navbar-fixed-bottom">
+        <h5 class="text-center">anton, brett, ivan and weston</h5>
       </div>
-      <div class="col-md-3 col-sm-offset-5">
-      <h3 class="git-link"><%= link_to "Sign in with Github", "/auth/github" %></h3>
-      </div>
-  <% end %>
-  <!-- end of navigation -->
-  <% if current_user %>
-    <%= flash.notice %>
-    <%= yield %>
-  <% end %>
-
+    </div>
   </body>
 </html>

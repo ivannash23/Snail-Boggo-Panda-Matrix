@@ -1,8 +1,14 @@
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-lg-6 col-lg-offset-3">
-      <div>Text here</div>
-        Content
-      </div>
+<div class="home text-center">
+  <%= image_tag("GA-Hub.png", :width=> "500px", :height=> "165px") %>
+
+  <div class="col-xs-12 home-search-bar">
+    <div class="input-group">
+      <%= form_tag("/search", method: "get") do %>
+        <%= text_field_tag(:q) %>
+        <%= submit_tag("Search") %>
+      <% end %>
+      <br>
+      <a href="/repos"><button class="btn index-btn">all repos</button></a>
     </div>
-  </div> -->
+  </div>
+</div>
