@@ -15,8 +15,7 @@ class ReposController < ApplicationController
 
   def search
     query = params[:q]
-    @results = (Repo.search query).count
-    @repos = Repo.search query, page: params[:page], per_page: 10
+    @repos = Repo.page(params[:page]).search query
   end
 
 end
